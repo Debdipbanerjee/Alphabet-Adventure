@@ -9,6 +9,13 @@ public class Collectable : MonoBehaviour
     public AudioSource AudioSource;
     public AudioClip AudioClip;
 
+    public static int total;
+
+    private void Awake()
+    {
+        total++;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +32,7 @@ public class Collectable : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
+            OnCollected?.Invoke();
             AudioSource.PlayClipAtPoint(AudioClip, transform.position);
             Destroy(gameObject);
         }
